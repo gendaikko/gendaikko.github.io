@@ -1,19 +1,15 @@
-from google import genai
-import datetime
-import os
+from google import genai [cite: 5]
+import datetime [cite: 5]
+import os [cite: 5]
 
-# APIキー設定
-client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+client = genai.Client(api_key=os.environ["GEMINI_API_KEY"]) [cite: 5]
+date_str = datetime.datetime.now().strftime("%Y-%m-%d") [cite: 5]
 
-# 日付
-date_str = datetime.datetime.now().strftime("%Y-%m-%d")
-
-# プロンプト（HugoのFront Matterを含めるように指示）
+# Hugoで表示するためにタイトルや日付の情報を追加
 prompt = f"""
 今日は{date_str}です。
-SEOを意識した日本語ブログ記事を書いてください。
+SEOを意識した日本語ブログ記事を、以下のHugo形式で書いてください。
 
-以下の形式で出力してください：
 ---
 title: "記事のタイトル"
 date: {date_str}
@@ -21,21 +17,19 @@ draft: false
 ---
 
 # 記事のタイトル
-（ここから本文。見出しを3つ以上含め、約1500文字で構成してください）
+（ここに見出し3つ以上、1500文字程度の本文）
 """
 
-# 生成 (モデル名の 'models/' を削除) [cite: 10]
+# モデル名を 'gemini-1.5-pro' に修正（models/ は不要） 
 response = client.models.generate_content(
     model="gemini-1.5-pro", 
     contents=prompt
 )
 
-# フォルダ作成
-os.makedirs("content/posts", exist_ok=True)
+os.makedirs("content/posts", exist_ok=True) [cite: 5]
+filename = f"content/posts/{date_str}-auto-post.md" [cite: 5]
 
-# 保存
-filename = f"content/posts/{date_str}-auto-post.md"
 with open(filename, "w", encoding="utf-8") as f:
-    f.write(response.text)
+    f.write(response.text) [cite: 5]
 
-print("記事を生成しました:", filename)
+print("記事を生成しました:", filename) [cite: 5]
