@@ -23,9 +23,9 @@ draft: false
 （ここに見出しを3つ以上含め、約1500文字で構成してください）
 """
 
-# 生成（モデル名から 'models/' を削除して修正）
+# 生成（確実に利用可能な gemini-1.5-flash を指定）
 response = client.models.generate_content(
-    model="gemini-1.5-pro", 
+    model="gemini-1.5-flash", 
     contents=prompt
 )
 
