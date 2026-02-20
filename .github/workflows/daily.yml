@@ -1,27 +1,27 @@
-name: Auto Blog Post
+[cite_start]name: Auto Blog Post [cite: 1]
 
 on:
-  workflow_dispatch:
+  [cite_start]workflow_dispatch: [cite: 1]
   schedule:
-    - cron: '0 0 * * *'
+    - [cite_start]cron: '0 0 * * *' [cite: 1]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    [cite_start]runs-on: ubuntu-latest [cite: 1]
     permissions:
-      contents: write
+      [cite_start]contents: write [cite: 1]
       pages: write
       id-token: write
     steps:
       - uses: actions/checkout@v4
         with:
-          [cite_start]submodules: true  # テーマを使用している場合 [cite: 1]
+          submodules: true
           fetch-depth: 0
 
       - name: Setup Python
-        uses: actions/setup-python@v4
+        [cite_start]uses: actions/setup-python@v4 [cite: 1]
         with:
-          python-version: '3.11'
+          [cite_start]python-version: '3.11' [cite: 1]
 
       - name: Install dependencies
         [cite_start]run: pip install google-genai [cite: 2]
@@ -31,16 +31,14 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python generate_post.py
 
-      # 生成された記事をリポジトリに保存 [cite: 3, 4]
       - name: Commit and push
         run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git add content/posts/
-          git commit -m "Auto generated post: $(date +'%Y-%m-%d')" || echo "No changes"
+          git config user.name "github-actions" [cite: 3]
+          git config user.email "actions@github.com" [cite: 3]
+          git add . [cite: 3]
+          git commit -m "Auto generated post" || echo "No changes" [cite: 4]
           git push
 
-      # Hugoのセットアップとビルド
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
@@ -50,7 +48,6 @@ jobs:
       - name: Build site
         run: hugo --minify
 
-      # GitHub Pagesへデプロイ
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
