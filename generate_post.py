@@ -20,7 +20,7 @@ SEOを意識した日本語ブログ記事を書いてください。
 
 # 生成
 response = client.models.generate_content(
-    model="gemini-1.5-pro",
+    model="gemini-1.5-pro"
     contents=prompt
 )
 
