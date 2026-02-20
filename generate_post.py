@@ -1,12 +1,11 @@
-import google.generativeai as genai
+from google import genai
 import datetime
 import os
 
-# API設定
-genai.configure(api_key=os.environ["GEMINI_API_KEY"])
-model = genai.GenerativeModel('gemini-1.5-flash')
+# APIキー設定
+client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
-# 今日の日付
+# 日付
 date_str = datetime.datetime.now().strftime("%Y-%m-%d")
 
 # プロンプト
@@ -20,9 +19,12 @@ SEOを意識した日本語ブログ記事を書いてください。
 """
 
 # 生成
-response = model.generate_content(prompt)
+response = client.models.generate_content(
+    model="gemini-1.5-flash-latest",
+    contents=prompt
+)
 
-# content ディレクトリを作る
+# フォルダ作成
 os.makedirs("content/posts", exist_ok=True)
 
 # 保存
