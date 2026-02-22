@@ -1,0 +1,27 @@
+baseURL = "https://gendaikko.github.io/"
+languageCode = "ja-jp"
+title = "My AI Blog"
+theme = "hugo-PaperMod"
+
+# サイト全体の著者設定
+[author]
+  name = "gendaikko"
+
+[params]
+  env = "production"
+  title = "My AI Blog"
+  description = "Geminiが毎日更新する自動生成ブログです"
+  author = "gendaikko"
+
+  # PaperMod固有の表示設定
+  [params.homeInfoParams]
+    Title = "Hi there \U0001F44B"
+    Content = "Geminiが毎日自動で記事を投稿するブログへようこそ。"
+
+# 記事（posts）の設定
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    name = "Posts"
+    url = "/posts/"
+    weight = 10
