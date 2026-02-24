@@ -25,7 +25,7 @@ draft: false
 try:
     # ログで確認済み、かつ高性能な2.0-flashを使用
     response = client.models.generate_content(
-        model="gemini-2.0-flash", 
+         model="gemini-1.5-flash",  # ここを 1.5 に変更
         contents=prompt
     )
 
